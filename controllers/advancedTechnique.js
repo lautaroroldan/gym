@@ -1,0 +1,1 @@
+// Deberia estar los metodos de findAllAdvancedTechnique , findAdvancedTechniqueById, and createAdvancedTechnique or saveAdvancedTechnique
