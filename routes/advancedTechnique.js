@@ -1,24 +1,28 @@
 import express from "express";
 const advancedTechniqueRouter = express.Router()
-import { traerTodosLosAdvancedTechniques,traerAdvacedTechniquePorId,guardar,borrar } from "../controllers/advancedTechnique.js"
-advancedTechniqueRouter.get('/', (req, res) => {
-    // retornar todos los advancedTechniques
-    traerTodosLosAdvancedTechniques
-    res.send('AdvancedTechniques')
+import { findAllAdvancedTechnique, findAdvancedTechniqueById, createAdvancedTechnique, deleteAdvancedTechniqueById } from "../controllers/advancedTechnique.js"
+
+advancedTechniqueRouter.get('/', async (req, res) => {
+    const advancedTechniques = await findAllAdvancedTechnique()
+    res.send(advancedTechniques)
 })
 
 advancedTechniqueRouter.get('/:id', (req, res) => {
     req.params.id
-    traerAdvacedTechniquePorId
+    // findAdvancedTechniqueById
 })
 
-advancedTechniqueRouter.post('/', (req, res) => {
-    // crear un advancedTechnique
-    req.body
-    guardar
+advancedTechniqueRouter.post('/', async (req, res) => {
+    try {
+        await createAdvancedTechnique(req.body)
+        res.send('Advanced Technique created')
+    } catch (e) {
+        console.log(e)
+        res.send('Error creating advanced technique')
+    }
 })
-advancedTechniqueRouter.delete('/id',(req,res)=>{
-    req.params.id
-    borrar
+advancedTechniqueRouter.delete('/:id', (req, res) => {
+    // req.params.id
+    // deleteAdvancedTechniqueById
 })
 export default advancedTechniqueRouter 

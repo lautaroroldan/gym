@@ -1,22 +1,24 @@
-const mongoose=require('mongoose')
-const advancedTechniqueSchema=new mongoose.Schema({
-    type:{
+import mongoose from 'mongoose';
+import AdvancedTechniqueType from './AdvancedTechniqueType.js';
+const advancedTechniqueSchema = new mongoose.Schema({
+    type: {
         type: mongoose.SchemaTypes.ObjectId,
-        required:true,
-        ref:"AdvancedTechniqueType"//para que lo traiga bien hay que hacer referencia de a quien se lo esta trayendo
+        required: true,
+        ref: "AdvancedTechniqueType"
     },
-    sets:[{
-        repetition:Number,
-        weight:Number,
-        rest:Number
+    sets: [{
+        repetition: Number,
+        weight: Number,
+        rest: Number
     }],
-    seconds:Number,
-    repetition:Number,
-    repetitionQuantity:Number,
-    rest:Number
-    },
-    {
-    collection:"AdvancedTechnique"
-    }
-)
-module.exports=mongoose.model("AdvancedTechnique",advancedTechniqueSchema)
+    seconds: Number,
+    repetition: Number,
+    repetitionQuantity: Number,
+    rest: Number
+}, {
+    collection: "AdvancedTechnique"
+});
+
+const AdvancedTechnique = mongoose.model('AdvancedTechnique', advancedTechniqueSchema);
+
+export default AdvancedTechnique;

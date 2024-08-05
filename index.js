@@ -1,13 +1,23 @@
 import express from 'express'
 import advancedTechniqueRouter from './routes/advancedTechnique.js'
+import { connect } from 'mongoose'
+import 'dotenv/config'
+const { DATABASE_URL } = process.env
 const app = express()
+app.use(express.json());
+
+connect(DATABASE_URL).then(() => {
+    console.log('Connected to database')
+}).catch((error) => {
+    console.log('Error connecting to database', error)
+})
 
 app.listen(3000, () => {
-    console.log('Server is running on port 3000')
+    console.log('Server is running on port 3000', DATABASE_URL)
 })
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/advancedTechniques', advancedTechniqueRouter)
+app.use('/advancedTechnique', advancedTechniqueRouter)

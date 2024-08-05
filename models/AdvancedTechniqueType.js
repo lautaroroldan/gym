@@ -1,10 +1,8 @@
-const mongoose=require('mongoose')
-const advancedTechniqueSchema=mongoose.Schema(
-    {
-        name:String
-    },
-    {
-        collection: "AdvancedTechniqueType"
-    }
-)
-module.exports=mongoose.model("AdvancedTechniqueType",advancedTechniqueSchema)
+import { Schema, model } from 'mongoose'
+const advancedTechniqueTypeSchema = new Schema({
+    name: String
+}, {
+    collection: "AdvancedTechniqueType"
+})
+
+export default model("AdvancedTechniqueType", advancedTechniqueTypeSchema)
