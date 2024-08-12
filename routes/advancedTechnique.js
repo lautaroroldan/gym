@@ -1,9 +1,9 @@
 import express from "express";
 const advancedTechniqueRouter = express.Router()
-import { findAllAdvancedTechnique, findAdvancedTechniqueById, createAdvancedTechnique, deleteAdvancedTechniqueById } from "../controllers/advancedTechnique.js"
+import { createAdvancedTechnique, getAllAdvancedTechnique } from "../controllers/advancedTechnique.js"
 
 advancedTechniqueRouter.get('/', async (req, res) => {
-    const advancedTechniques = await findAllAdvancedTechnique()
+    const advancedTechniques = await getAllAdvancedTechnique()
     res.send(advancedTechniques)
 })
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import AdvancedTechniqueType from './AdvancedTechniqueType.js';
+import Set from './Set.js';
 const advancedTechniqueSchema = new mongoose.Schema({
     type: {
         type: mongoose.SchemaTypes.ObjectId,
@@ -7,9 +8,8 @@ const advancedTechniqueSchema = new mongoose.Schema({
         ref: "AdvancedTechniqueType"
     },
     sets: [{
-        repetition: Number,
-        weight: Number,
-        rest: Number
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Set"
     }],
     seconds: Number,
     repetition: Number,

@@ -1,6 +1,6 @@
 import AdvancedTechnique from "../models/AdvancedTechnique.js"
 
-export async function findAllAdvancedTechnique() {
+export async function getAllAdvancedTechnique() {
     try {
         return await AdvancedTechnique.where().populate('type')
     } catch (error) {
