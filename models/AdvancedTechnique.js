@@ -12,9 +12,7 @@ const advancedTechniqueSchema = new mongoose.Schema({
         ref: "Set"
     }],
     seconds: Number,
-    repetition: Number,
     repetitionQuantity: Number,
-    rest: Number
 }, {
     collection: "AdvancedTechnique"
 });
