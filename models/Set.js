@@ -20,6 +20,4 @@ const setSchema = new mongoose.Schema({
     collection: "Set"
 });
 
-const Set = mongoose.model('Set', setSchema);
-
-export default Set;
+export default model('Set', setSchema)

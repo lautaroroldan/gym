@@ -19,6 +19,4 @@ const advancedTechniqueSchema = new mongoose.Schema({
     collection: "AdvancedTechnique"
 });
 
-const AdvancedTechnique = mongoose.model('AdvancedTechnique', advancedTechniqueSchema);
-
-export default AdvancedTechnique;
+export default model('AdvancedTechnique', advancedTechniqueSchema)
