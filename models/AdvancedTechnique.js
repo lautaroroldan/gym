@@ -17,4 +17,4 @@ const advancedTechniqueSchema = new mongoose.Schema({
     collection: "AdvancedTechnique"
 });
 
-export default model('AdvancedTechnique', advancedTechniqueSchema)
+export default mongoose.model('AdvancedTechnique', advancedTechniqueSchema)//si no importo la funcion model, sino que todo mongoose. Hay que trabajar las llamadas a metodos y clases de esa forma
