@@ -4,7 +4,7 @@ import { deleteAdvancedTechniqueById } from "./advancedTechnique.js"
 
 export async function getAllSets() {
     try {
-        return await Set.where('type').equals('66b63a5c1b4f2d9d466fddbc').populate({
+        return await Set.where().populate({
             path: 'type', // Popula el campo 'type' del Set
         })
             .populate({
@@ -27,8 +27,8 @@ export async function getAllSets() {
     }
 }
 
-export async function findSetById(id){
-    try{
+export async function findSetById(id) {
+    try {
         return await Set.findById(id).populate({
             path: 'type', // Popula el campo 'type' del Set
         })
@@ -46,7 +46,7 @@ export async function findSetById(id){
                     }
                 ]
             })
-    }catch(error){
+    } catch (error) {
         console.log(error)
         return error
     }
@@ -69,7 +69,7 @@ export async function createSet(newSet) {
 
             // Crea y guarda el AdvancedTechnique
             const advancedTechnique = await AdvancedTechnique.create(advancedTechniqueData);
-            newSet.advancedtechnique = advancedTechnique._id;
+            newSet.advancedtechnique = advancedTechnique._id
         }
         const savedSet = await Set.create(newSet);
         await savedSet.save()
@@ -77,18 +77,21 @@ export async function createSet(newSet) {
     }
     catch (e) {
         console.log(e)
-        return error
+        return e
     }
 }
 
 export async function deleteSetById(id) {
-   try{
-    if(Set.findById(id).advancedtechnique){
-        const resultado= await deleteAdvancedTechniqueById(Set.findById(id).advancedtechnique)
-        if(resultado.error)console.log('error borrando el advanced technique del set')
-    }
-   await Set.findByIdAndDelete(id)
-    }catch(error){
+    try {
+        const set = await Set.findById(id)
+        if (!set) {
+            throw new Error('set not found')
+        }
+        if (set.advancedtechnique) {
+            await deleteAdvancedTechniqueById(set.advancedtechnique)
+        }
+        await Set.findByIdAndDelete(id)
+    } catch (error) {
         console.log(error)
         return error
     }

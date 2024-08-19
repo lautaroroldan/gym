@@ -21,7 +21,7 @@ export async function findAdvancedTechniqueById(id) {
 
 export async function createAdvancedTechnique(newAdvancedTechnique) {
     try {
-        if(newAdvancedTechnique.sets && Array.isArray(newAdvancedTechnique.sets)){
+        if (newAdvancedTechnique.sets && Array.isArray(newAdvancedTechnique.sets)) {
 
             // Guarda los sets anidados dentro de advancedtechnique primero
             const setPromises = newAdvancedTechnique.sets.map(async (set) => {
@@ -44,10 +44,17 @@ export async function createAdvancedTechnique(newAdvancedTechnique) {
 
 export async function deleteAdvancedTechniqueById(id) {
     try {
-        await Set.deleteMany({_id:{$in :AdvancedTechnique.findById(id).sets}})
+        const advancedTechnique = await AdvancedTechnique.findById(id).populate('sets')
+        if (!advancedTechnique) {
+            throw new Error('advanced technique not found')
+        }
+        if (advancedTechnique.sets && advancedTechnique.sets.length > 0) {
+            const sets = advancedTechnique.sets
+            await Promise.all(sets.map(set => Set.findByIdAndDelete(set._id)))
+        }
         await AdvancedTechnique.findByIdAndDelete(id)
     } catch (e) {
         console.log(e)
-        return error
+        return e
     }
 }

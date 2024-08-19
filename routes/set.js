@@ -1,5 +1,5 @@
 import express from "express";
-import { createSet, getAllSets, findSetById, deleteSetById} from "../controllers/set.js";
+import { createSet, getAllSets, findSetById, deleteSetById } from "../controllers/set.js";
 const setRouter = express.Router()
 
 setRouter.post('/', async (req, res) => {
@@ -23,20 +23,21 @@ setRouter.get('/', async (req, res) => {
     }
 })
 
-setRouter.get('/:id', async(req,res)=>{
-    try{
-        const set=await findSetById(req.params.id)
+setRouter.get('/:id', async (req, res) => {
+    try {
+        const set = await findSetById(req.params.id)
         res.json(set)
-    }catch(e){
+    } catch (e) {
         console.log(e)
         res.send('Error getting set')
     }
 })
 
-setRouter.delete('/:id',async(req,res)=>{
-    try{
+setRouter.delete('/:id', async (req, res) => {
+    try {
         await deleteSetById(req.params.id)
-    }catch(e){
+        res.send('set deleted')
+    } catch (e) {
         console.log(e)
         res.send('Error deleting set')
     }

@@ -6,7 +6,8 @@ import Set from './models/Set.js'
 import setRouter from './routes/set.js'
 const { DATABASE_URL } = process.env
 const app = express()
-app.use(express.json());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 connect(DATABASE_URL).then(() => {
     console.log('Connected to database')
